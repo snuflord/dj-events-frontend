@@ -1,8 +1,14 @@
 import Head from "next/head"
 import Header from "./Header"
 import Footer from "./Footer"
+import Showcase from "./Showcase"
+import { useRouter } from "next/router"
 
 function Layout({title, keywords, description, children}) {
+
+    // we are using router to check for the home path (/) and displaying the showcase component if so.
+    const router = useRouter()
+
   return (
     <>
         <Head>
@@ -11,9 +17,13 @@ function Layout({title, keywords, description, children}) {
         </Head>
 
         <Header />
+
+        {router.pathname === '/' && <Showcase />}
+        
+
         <main className="px-4 text-black">
-            <div className='h-auto flex justify-left items-center bg-white/50 mx-auto w-3/4 rounded-lg mb-16 p-16 my-5'>
-                <div className='text-2xl font-medium'>{children}</div>
+            <div className='h-auto bg-white/50 mx-auto w-full md:w-3/4 rounded-lg mb-16 p-4 md:p-16 my-5'>
+                <div className='text-1xl font-medium'>{children}</div>
             </div>
         </main>
 
